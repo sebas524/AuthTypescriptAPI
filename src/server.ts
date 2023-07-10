@@ -47,12 +47,7 @@ io.on("connection", () => {
 mongoose.connect(`${process.env.MONGO_URI}`).then(() => {
   console.log("connected to mongo db");
 
-  httpServer.listen(port, () => {
-    console.log(`server listening on port: ${port} `);
+  httpServer.listen(process.env.PORT || port, () => {
+    console.log(`server is listening... `);
   });
 });
-
-const dbUrl = process.env.MONGO_URI;
-console.log("xxx", dbUrl);
-
-// "mongodb://localhost:27017/trelloApi"
