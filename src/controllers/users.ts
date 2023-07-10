@@ -3,11 +3,15 @@ import UserModel from "../models/user";
 import { UserDocument } from "../types/user.interface";
 import { Error } from "mongoose";
 import jwt from "jsonwebtoken";
-import { secretKey } from "../../config";
 import { ExpressRequestInterface } from "../types/expresRequest.interface";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 export const normalizeUser = (user: UserDocument) => {
-  const token = jwt.sign({ id: user.id, email: user.email }, secretKey);
+  const token = jwt.sign(
+    { id: user.id, email: user.email },
+    `${process.env.JWT_SEED}`
+  );
   return {
     email: user.email,
     username: user.username,

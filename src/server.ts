@@ -6,6 +6,8 @@ import mongoose from "mongoose";
 import { Server } from "socket.io";
 import * as usersController from "./controllers/users";
 import * as boardsController from "./controllers/boards";
+import * as heroesController from "./controllers/heroes";
+
 import bodyParser from "body-parser";
 import authMiddleware from "./middlewares/auth";
 import cors from "cors";
@@ -35,6 +37,8 @@ app.post(
   authMiddleware,
   boardsController.createBoard
 );
+app.get("/api/heroes/allHeroes", authMiddleware, heroesController.getHeroes);
+app.post("/api/heroes/createHero", authMiddleware, heroesController.createHero);
 
 io.on("connection", () => {
   console.log("io connected");
