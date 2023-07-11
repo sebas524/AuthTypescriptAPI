@@ -12,7 +12,7 @@ export const getHeroes = async (
       return res.status(401);
     }
     const foundHeroes = await HeroModel.find({ userId: req.user.id });
-    res.status(200).send({ Status: "Success", foundHeroes });
+    res.status(200).send({ foundHeroes });
   } catch (err) {
     next(err);
   }
