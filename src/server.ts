@@ -38,7 +38,15 @@ app.post(
   boardsController.createBoard
 );
 app.get("/api/heroes/allHeroes", authMiddleware, heroesController.getHeroes);
+app.get("/api/heroes/hero/:id", authMiddleware, heroesController.getHero);
 app.post("/api/heroes/createHero", authMiddleware, heroesController.createHero);
+app.patch("/api/heroes/hero/:id", authMiddleware, heroesController.updateHero);
+app.delete("/api/heroes/hero/:id", authMiddleware, heroesController.deleteHero);
+app.get(
+  "/api/heroes/search/:letter",
+  authMiddleware,
+  heroesController.searchHeroesByLetter
+);
 
 io.on("connection", () => {
   console.log("io connected");
